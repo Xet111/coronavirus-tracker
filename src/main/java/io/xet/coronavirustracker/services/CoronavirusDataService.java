@@ -28,7 +28,7 @@ public class CoronavirusDataService {
     }
 
     @PostConstruct
-    @Scheduled(cron = "* * * 1 * *")
+    @Scheduled(cron = "* * 1 * * *")
     public void fetchVirusData() throws IOException, InterruptedException {
         List<LocationStats> newStats = new ArrayList<>();
         HttpClient client = HttpClient.newHttpClient();
@@ -44,7 +44,6 @@ public class CoronavirusDataService {
             locationStat.setState(record.get("Province/State"));
             locationStat.setCountry(record.get("Country/Region"));
             locationStat.setLatestReportedCases(record.get(record.size() - 1));
-            System.out.println(locationStat);
             newStats.add(locationStat);
         }
         this.allStats = newStats;
