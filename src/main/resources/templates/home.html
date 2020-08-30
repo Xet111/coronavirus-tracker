@@ -16,8 +16,12 @@
 <div class="jumbotron">
     <h1 class="display-4" th:text="${totalCases}"></h1>
     <p class="lead">Total cases</p>
-    <h2 class="display-4" th:text="${casesInUkraine}"></h2>
+    <h3 class="display-4" th:text="${totalDailyDifference}">+</h3>
+    <p class="lead">Total daily cases</p>
+    <h1 class="display-4" th:text="${casesInUkraine}"></h1>
     <p class="lead">Total cases in Ukraine</p>
+    <h3 class="display-4" th:text="${dailyDifferenceInUkraine}">+</h3>
+    <p>Daily cases in Ukraine</p>
 </div>
 
 <table>
@@ -25,11 +29,13 @@
         <th>State</th>
         <th>Country</th>
         <th>Total cases</th>
+        <th>Daily cases</th>
     </tr>
     <tr th:each="locationStat : ${locationStats}">
         <td th:text="${locationStat.state}"></td>
         <td th:text="${locationStat.country}"></td>
         <td th:text="${locationStat.latestReportedCases}">0</td>
+        <td th:text="${locationStat.dailyDifference}"></td>
     </tr>
 </table>
 </body>
