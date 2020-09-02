@@ -18,15 +18,24 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model){
         List<LocationStats> allStats = coronavirusDataService.getAllStats();
-        int totalCases = allStats.stream().mapToInt(value -> Integer.parseInt(value.getLatestReportedCases())).sum();
-        int casesInUkraine = allStats.stream()
+        int totalCases = allStats
+                .stream()
+                .mapToInt(value -> Integer.parseInt(value.getLatestReportedCases()))
+                .sum();
+        int casesInUkraine = allStats
+                .stream()
                 .filter(locationStats -> locationStats.getCountry().equals("Ukraine"))
                 .mapToInt(value -> Integer.parseInt(value.getLatestReportedCases()))
                 .sum();
-        int totalDailyDifference = allStats.stream().mapToInt(value -> value.getDailyDifference()).sum();
-        int dailyDifferenceInUkraine = allStats.stream()
+        int totalDailyDifference = allStats
+                .stream()
+                .mapToInt(value -> value.getDailyDifference())
+                .sum();
+        int dailyDifferenceInUkraine = allStats
+                .stream()
                 .filter(locationStats -> locationStats.getCountry().equals("Ukraine"))
                 .mapToInt(value -> value.getDailyDifference()).sum();
+
         model.addAttribute("locationStats", coronavirusDataService.getAllStats());
         model.addAttribute("totalCases", totalCases);
         model.addAttribute("casesInUkraine", casesInUkraine);
